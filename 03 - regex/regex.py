@@ -2,21 +2,18 @@ import re
 
 log = 'July 31 07:51:48 mycomputer bad_process[12345]: ERROR: Performing package upgrade'
 regex = r'\[(\d+)\]'
-result = re.search(regex, log)
-print(result[1])
-print()
+assert re.search(regex, log)[1] == '12345'
 
 
 def check_aei(text):
     return re.search(r"a.e.i", text) is not None
 
 
-print(check_aei("academia"))  # True
-print(check_aei("aerial"))  # False
-print(check_aei("paramedic"))  # True
-print()
+assert check_aei("academia") is True
+assert check_aei("aerial") is False
+assert check_aei("paramedic") is True
 
-print(re.search(r'p.ng', 'penguin'))
-print(re.search(r'p.ng', 'clapping'))
-print(re.search(r'p.ng', 'sponge'))
-print(re.search(r'p.ng', 'Pangaea', re.IGNORECASE))
+assert re.search(r'p.ng', 'penguin')[0] == 'peng'
+assert re.search(r'p.ng', 'clapping')[0] == 'ping'
+assert re.search(r'p.ng', 'sponge')[0] == 'pong'
+assert re.search(r'p.ng', 'Pangaea', re.IGNORECASE)[0] == 'Pang'
